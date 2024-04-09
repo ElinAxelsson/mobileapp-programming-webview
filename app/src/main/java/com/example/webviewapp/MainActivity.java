@@ -1,9 +1,11 @@
 package com.example.webviewapp;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -12,16 +14,24 @@ import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
 
+    @SuppressLint("SetJavaScriptEnabled")
     public void showExternalWebPage(){
-        // TODO: Add your code for showing external web page here
+        WebView webView = findViewById(R.id.My_WebView);
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        myWebView.loadUrl("https://his.se");
     }
-
+    @SuppressLint("SetJavaScriptEnabled")
     public void showInternalWebPage(){
-        // TODO: Add your code for showing internal web page here
+        WebView webView = findViewById(R.id.My_WebView);
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webView.loadUrl("file:///android_asset/internal_page.html");
     }
 
     WebView myWebView;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
 
         myWebView = findViewById(R.id.My_WebView);
         myWebView.setWebViewClient(new WebViewClient());
+
+
+        WebSettings webSettings = myWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+
         myWebView.loadUrl("https://his.se");
 
 
