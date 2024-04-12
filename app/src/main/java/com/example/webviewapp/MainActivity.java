@@ -1,6 +1,6 @@
 package com.example.webviewapp;
 
-import android.annotation.SuppressLint;
+import android.view.View;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -14,41 +14,33 @@ import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
 
-    @SuppressLint("SetJavaScriptEnabled")
+
     public void showExternalWebPage(){
         WebView webView = findViewById(R.id.My_WebView);
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        myWebView.loadUrl("https://his.se");
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient());
+        webView.loadUrl("https://his.se");
     }
-    @SuppressLint("SetJavaScriptEnabled")
+
     public void showInternalWebPage(){
         WebView webView = findViewById(R.id.My_WebView);
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webView.loadUrl("file:///android_asset/internal_page.html");
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient());
+        myWebView.loadUrl("file:///android_asset/about.html");
     }
 
     WebView myWebView;
 
-    @SuppressLint("SetJavaScriptEnabled")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        findViewById(R.id.My_WebView);
 
         myWebView = findViewById(R.id.My_WebView);
-        myWebView.setWebViewClient(new WebViewClient());
-
-
-        WebSettings webSettings = myWebView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-
-        myWebView.loadUrl("https://his.se");
-
+        myWebView.setWebViewClient(new WebViewClient()); // Do not open in Chrome!
 
         /*
         * Rename your App. Tip: Values->Strings
@@ -93,11 +85,17 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_external_web) {
             Log.d("==>","Will display external web page");
-            return true;
+
+              showExternalWebPage();
+
+             return true;
         }
 
         if (id == R.id.action_internal_web) {
             Log.d("==>","Will display internal web page");
+
+            showInternalWebPage();
+
             return true;
         }
 
