@@ -33,7 +33,6 @@ att texten i html-filen hamnade under appens namn längst upp så den inte synte
 Bilder läggs i samma mapp som markdown-filen.
 
 ![](Screenshot.png)
-![](Screenshot1.png)
 
 
 Läs gärna:
